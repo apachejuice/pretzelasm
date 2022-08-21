@@ -51,11 +51,13 @@ The signature `()!` denotes a method that takes no arguments and has no return v
 ```bnf
 function ::= '.' 'func' name args_list separator function_body separator '.' 'end'
 
-args_list ::= type{2,}
+args_list ::= '(' type* ')' type
 
-function_body ::= ( instruction | label )+
+function_body ::= ( ( instruction | label ) separator )+
 
 label ::= ':' name
 
-instruction ::= opcode argument*
+instruction ::= line_meta? opcode argument*
+
+line_meta ::= '%' number
 ```
